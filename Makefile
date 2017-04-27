@@ -26,7 +26,7 @@ APPLICATION_DESCRIPTION = $(shell jq -r '.description' package.json)
 APPLICATION_COPYRIGHT = $(shell jq -r '.copyright' package.json)
 APPLICATION_CATEGORY = public.app-category.developer-tools
 APPLICATION_BUNDLE_ID = io.resin.etcher
-APPLICATION_FILES = lib,assets
+APPLICATION_FILES = lib,assets,build
 
 # Add the current commit to the version if release type is "snapshot"
 RELEASE_TYPE ?= snapshot
@@ -176,9 +176,11 @@ $(BUILD_TEMPORARY_DIRECTORY): | $(BUILD_DIRECTORY)
 
 $(BUILD_DIRECTORY)/electron-$(TARGET_PLATFORM)-$(TARGET_ARCH)-dependencies: | $(BUILD_DIRECTORY)
 	mkdir $@
+	cp -rf src $@
 
 $(BUILD_DIRECTORY)/node-$(TARGET_PLATFORM)-$(TARGET_ARCH)-dependencies: | $(BUILD_DIRECTORY)
 	mkdir $@
+	cp -rf src $@
 
 $(BUILD_OUTPUT_DIRECTORY): | $(BUILD_DIRECTORY)
 	mkdir $@
