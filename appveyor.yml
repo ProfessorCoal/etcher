@@ -43,6 +43,7 @@ test_script:
   - npm --version
   - make sanity-checks
   - cmd: npm test
+  - cmd: make installers-all
 
 deploy_script:
   - cmd: .\scripts\ci\deploy-appveyor.bat
